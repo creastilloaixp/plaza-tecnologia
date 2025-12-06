@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flyer Plaza de la Tecnología</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .flyer-container {
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 9/16;
+            background: radial-gradient(circle at center, #FFD60A 0%, #D90429 80%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        /* Decorative Background Elements */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+        }
+        .c1 { width: 600px; height: 600px; top: -200px; left: -100px; }
+        .c2 { width: 400px; height: 400px; bottom: -100px; right: -100px; }
+
+        /* Header */
+        header {
+            z-index: 10;
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 0.9;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            text-shadow: 4px 4px 0px #000000;
+            transform: rotate(-2deg);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: #000;
+            color: #FFD60A;
+            padding: 0.2rem 1rem;
+            transform: rotate(-2deg) translateY(-10px);
+            display: inline-block;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Main Visual - Roulette Representation */
+        .roulette-visual {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 1rem 0;
+            z-index: 10;
+        }
+
+        .wheel-outer {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 10px solid #FFD60A;
+            background: conic-gradient(
+                #D90429 0deg 45deg,
+                #ffffff 45deg 90deg,
+                #D90429 90deg 135deg,
+                #ffffff 135deg 180deg,
+                #D90429 180deg 225deg,
+                #ffffff 225deg 270deg,
+                #D90429 270deg 315deg,
+                #ffffff 315deg 360deg
+            );
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            position: relative;
+            animation: spin 10s linear infinite;
+        }
+
+        .wheel-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: #FFD60A;
+            border-radius: 50%;
+            border: 4px solid #000;
+            z-index: 2;
+        }
+
+        .pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; 
+            height: 0; 
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #000;
+            z-index: 3;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3));
+        }
+
+        /* Floating Elements */
+        .floating-item {
+            position: absolute;
+            font-size: 2rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+        .f1 { top: 20%; left: 5%; animation-delay: 0s; }
+        .f2 { top: 25%; right: 5%; animation-delay: 1s; }
+        .f3 { bottom: 35%; left: 10%; animation-delay: 0.5s; }
+
+        /* QR Section */
+        .qr-section {
+            background: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            color: black;
+            z-index: 10;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            margin-top: auto;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background-color: #000; /* Placeholder for QR */
+            margin-bottom: 0.5rem;
+            background-image: url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://plaza-tecnologia-demo.vercel.app/');
+            background-size: cover;
+        }
+
+        .cta-text {
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #D90429;
+            text-transform: uppercase;
+        }
+        
+        .scan-me {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            font-size: 0.6rem;
+            opacity: 0.8;
+            z-index: 10;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flyer-container">
+        <div class="bg-circle c1"></div>
+        <div class="bg-circle c2"></div>
+
+        <header>
+            <div class="logo">Plaza de la Tecnología</div>
+            <h1>¡GIRA<br>Y GANA!</h1>
+            <div class="subtitle">TU LOCAL TE ESPERA</div>
+        </header>
+
+        <div class="roulette-visual">
+            <div class="pointer"></div>
+            <div class="wheel-outer"></div>
+            <div class="wheel-inner"></div>
+        </div>
+
+        <div class="floating-item f1">🎁</div>
+        <div class="floating-item f2">🏷️</div>
+        <div class="floating-item f3">✨</div>
+
+        <div class="qr-section">
+            <div class="qr-code"></div>
+            <div class="cta-text">¡ESCANEA AHORA!</div>
+            <div class="scan-me">Para jugar y ganar premios</div>
+        </div>
+
+        <footer>
+            *Aplican términos y condiciones. Válido solo en sucursales participantes.
+        </footer>
+    </div>
+
+</body>
+</html>
