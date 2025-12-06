@@ -80,9 +80,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onClose }) => {
 
   const filteredLeads = useMemo(() => {
     return allLeads.filter(lead => 
-      lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.phone.includes(searchTerm) ||
-      lead.city.toLowerCase().includes(searchTerm.toLowerCase())
+      (lead.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (lead.phone || '').includes(searchTerm) ||
+      (lead.city || '').toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [allLeads, searchTerm]);
 

@@ -18,6 +18,11 @@ export interface Lead extends UserData {
   id: string;
   prize: string;
   timestamp: number;
+  // CRM Fields
+  source?: string;
+  status?: string;
+  probability?: number;
+  assigned_to?: string;
 }
 
 export enum GameState {
